@@ -72,20 +72,11 @@
   --dur-slow: 600ms;
 }
 
+/* Dark mode SOLO via toggle explícito. No prefers-color-scheme. */
 [data-theme="dark"] {
   --bg: #1d1d1f;
   --fg: #f0f0f0;
   --muted: rgba(240, 240, 240, 0.55);
   --subtle: rgba(240, 240, 240, 0.08);
   --border: rgba(240, 240, 240, 0.12);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #1d1d1f;
-    --fg: #f0f0f0;
-    --muted: rgba(240, 240, 240, 0.55);
-    --subtle: rgba(240, 240, 240, 0.08);
-    --border: rgba(240, 240, 240, 0.12);
-  }
 }

@@ -10,12 +10,24 @@ year: 2025
 collaborators: []
 quote: "Hoy será un buen DíA."
 summary: "Dirección creativa, storytelling y dirección de arte para el festival estudiantil Día Amarillo UDEM."
-cover: "https://framerusercontent.com/images/yc2xs7h0OcoccN6B3UJ2MpqmhVk.jpg"
+cover: "/images/portfolio/dia-amarillo/yc2xs7h0OcoccN6B3UJ2MpqmhVk.jpg"
 gallery:
-  - { src: "https://framerusercontent.com/images/yc2xs7h0OcoccN6B3UJ2MpqmhVk.jpg" }
-  - { src: "https://framerusercontent.com/images/q1M048nPmYWLvT0qcAZIBmGRgE.jpg" }
-  - { src: "https://framerusercontent.com/images/V9vrIUAkVIzYPMozjdE2mTZejw4.jpg" }
-  - { src: "https://framerusercontent.com/images/VFPWObPqR6HrG1goY7YyXr6Xc.jpg" }
+  - { src: "/images/portfolio/dia-amarillo/yc2xs7h0OcoccN6B3UJ2MpqmhVk.jpg" }
+  - { src: "/images/portfolio/dia-amarillo/V9vrIUAkVIzYPMozjdE2mTZejw4.jpg" }
+  - { src: "/images/portfolio/dia-amarillo/VFPWObPqR6HrG1goY7YyXr6Xc.jpg" }
+  - { src: "/images/portfolio/dia-amarillo/QBHWoGWczwN4TkGPUt37CquS0.jpg" }
+  - { src: "/images/portfolio/dia-amarillo/dFVUpJ7OnX8VwBRH4PyqNPkD4LQ.jpg" }
+  - { src: "/images/portfolio/dia-amarillo/fw2Zu0jrg57RVg5PeqlyM6L368Q.jpg" }
+  - { src: "/images/portfolio/dia-amarillo/83eOYF51NL6liTJ2qnbTejOVAbE.jpg" }
+  - { src: "/images/portfolio/dia-amarillo/it0pgvRdtcejZutX3sNWCpYIQNg.jpg" }
+  - { src: "/images/portfolio/dia-amarillo/Z8MKPylCzAmbJBWeXhhnlNikodI.jpg" }
+  - { src: "/images/portfolio/dia-amarillo/sW4eFFkF8XZBywUfzgedTeyJcjQ.jpg" }
+  - { src: "/images/portfolio/dia-amarillo/jfXVbHVd1PNhMaYwBETmUER31Zo.jpg" }
+  - { src: "/images/portfolio/dia-amarillo/EZ7hcIdYKmMi4tMZC5dhq5p9No.jpg" }
+  - { src: "/images/portfolio/dia-amarillo/i42fCwfTt0qCGY3JfWPaDUAZk.jpg" }
+  - { src: "/images/portfolio/dia-amarillo/fbiHg9HA3nhjjHBdsLYeTybPNw.jpg" }
+  - { src: "/images/portfolio/dia-amarillo/8jdnJ30w2YJ9ZHD1jtuu22Cz7bs.jpg" }
+  - { src: "/images/portfolio/dia-amarillo/Fkm3SucFO3WiXisRMUXRij5M6fw.jpg" }
 order: 1
 featured: true
 ---

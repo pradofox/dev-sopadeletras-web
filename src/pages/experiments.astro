@@ -1,0 +1,106 @@
+---
+import Base from '../layouts/Base.astro';
+export const prerender = true;
+
+const experiments = [
+  {
+    title: 'meclente',
+    blurb: 'Vibe-code random. Tontería que vibe-codeé un día sin venir a cuento.',
+    href: '#',
+    status: 'wip',
+  },
+];
+---
+
+<Base
+  title="experiments"
+  description="Lab de sopadeletras®. Pruebas, vibe-codes y experimentos que viven fuera del portafolio principal."
+>
+  <section class="head">
+    <div class="container">
+      <span class="eyebrow">lab</span>
+      <h1 class="head__title">experiments</h1>
+      <p class="head__lede">
+        Pruebas, vibe-codes y juguetes de fin de semana. Cosas que existen porque sí <span class="wink">;)</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="list">
+    <div class="container">
+      <ul class="exps">
+        {experiments.map((e, i) => (
+          <li class="exp">
+            <span class="exp__num">{String(i+1).padStart(2,'0')}</span>
+            <div class="exp__body">
+              <h2 class="exp__title">{e.title}</h2>
+              <p class="exp__blurb">{e.blurb}</p>
+            </div>
+            <span class="exp__status">{e.status}</span>
+          </li>
+        ))}
+      </ul>
+
+      <p class="empty">Más cosas raras pronto.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .head { padding-top: var(--sp-12); padding-bottom: var(--sp-8); }
+  .head__title {
+    font-size: var(--fs-display);
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+    margin-block: var(--sp-4) var(--sp-5);
+    font-weight: 300;
+  }
+  .head__lede {
+    font-size: var(--fs-xl);
+    color: var(--muted);
+    max-width: 50ch;
+    line-height: 1.4;
+  }
+  .wink { color: var(--accent); }
+
+  .list { padding-bottom: var(--sp-16); }
+  .exps {
+    list-style: none;
+    padding: 0; margin: 0;
+    border-top: 1px solid var(--border);
+  }
+  .exp {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: var(--sp-5);
+    padding-block: var(--sp-6);
+    border-bottom: 1px solid var(--border);
+    align-items: baseline;
+  }
+  .exp__num {
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.12em;
+  }
+  .exp__title {
+    font-size: var(--fs-2xl);
+    letter-spacing: -0.03em;
+    font-weight: 400;
+  }
+  .exp__blurb { color: var(--muted); margin-top: var(--sp-1); max-width: 60ch; }
+  .exp__status {
+    font-size: var(--fs-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 4px 8px;
+  }
+  .empty {
+    margin-top: var(--sp-10);
+    color: var(--muted);
+    font-style: italic;
+    font-size: var(--fs-base);
+  }
+</style>

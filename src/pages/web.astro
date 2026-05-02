@@ -1,0 +1,114 @@
+---
+import Base from '../layouts/Base.astro';
+export const prerender = true;
+---
+
+<Base
+  title="web"
+  description="sopadeletras® hace sitios web rápidos, claros y dueños del negocio. Sin Wix, sin plantillas. Para negocios locales en Monterrey."
+>
+  <section class="hero">
+    <div class="container hero__inner">
+      <p class="eyebrow">venture</p>
+      <h1 class="hero__title">
+        <span>sitios web</span>
+        <span class="alt">que sirven.</span>
+      </h1>
+      <p class="hero__lede">
+        Hacemos sitios rápidos, claros y dueños del negocio. Sin Wix, sin plantillas.
+        Para negocios locales que quieren un sitio que cargue en 1 segundo y se vea
+        como si lo hubiera diseñado un estudio.
+      </p>
+      <div class="hero__cta">
+        <a href="mailto:hola@sopadeletras.art?subject=Quiero%20un%20sitio%20web" class="btn btn--primary">empezar →</a>
+        <a href="/contacto" class="btn btn--ghost">cuéntame más</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid-sec">
+    <div class="container">
+      <header class="sec-head">
+        <span class="eyebrow">qué incluye</span>
+        <h2 class="sec-title">Lo esencial,<br/>bien hecho.</h2>
+      </header>
+      <ul class="features">
+        <li>
+          <span class="num">01</span>
+          <h3>Diseño hecho a la medida</h3>
+          <p>No es una plantilla. Tipografía, color y layout pensados para tu marca.</p>
+        </li>
+        <li>
+          <span class="num">02</span>
+          <h3>Carga en menos de 1s</h3>
+          <p>Astro + Cloudflare. Cero JavaScript innecesario. Tu cliente entra y ya.</p>
+        </li>
+        <li>
+          <span class="num">03</span>
+          <h3>SEO y AEO bien armados</h3>
+          <p>Para que te encuentre Google y para que te recomiende ChatGPT.</p>
+        </li>
+        <li>
+          <span class="num">04</span>
+          <h3>Tú eres dueño</h3>
+          <p>Hosting tuyo, dominio tuyo, código tuyo. No te quedas atado a nadie.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container cta__inner">
+      <p class="eyebrow">conversación</p>
+      <h2 class="cta__title">¿Quieres uno?</h2>
+      <p class="cta__lede">Te respondemos hoy.</p>
+      <a href="mailto:hola@sopadeletras.art?subject=Quiero%20un%20sitio%20web" class="btn btn--primary btn--lg">hola@sopadeletras.art →</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { padding-block: var(--sp-12) var(--sp-10); min-height: 70vh; display: flex; align-items: center; }
+  .hero__inner { display: flex; flex-direction: column; gap: var(--sp-5); }
+  .hero__title {
+    font-size: clamp(3rem, 9vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+    font-weight: 300;
+  }
+  .hero__title span { display: block; }
+  .hero__title .alt { font-style: italic; color: var(--accent); }
+  .hero__lede { max-width: 56ch; font-size: var(--fs-lg); color: var(--muted); line-height: 1.5; }
+  .hero__lede em { font-style: normal; color: var(--fg); }
+
+  .hero__cta { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-3); }
+  .btn { display: inline-flex; align-items: center; gap: var(--sp-2); padding: var(--sp-3) var(--sp-5); font-size: var(--fs-sm); border: 1px solid var(--fg); transition: background var(--dur), color var(--dur), border-color var(--dur); }
+  .btn--primary { background: var(--fg); color: var(--bg); }
+  .btn--primary:hover { background: var(--accent); border-color: var(--accent); color: white; }
+  .btn--ghost:hover { background: var(--fg); color: var(--bg); }
+  .btn--lg { padding: var(--sp-4) var(--sp-6); font-size: var(--fs-base); }
+
+  .sec-head { display: grid; grid-template-columns: 1fr; gap: var(--sp-4); margin-bottom: var(--sp-10); align-items: end; }
+  @media (min-width: 768px) { .sec-head { grid-template-columns: auto 1fr; column-gap: var(--sp-8); } }
+  .sec-title { font-size: var(--fs-3xl); letter-spacing: -0.04em; line-height: 1; max-width: 16ch; font-weight: 400; }
+
+  .features { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--border); }
+  @media (min-width: 768px) { .features { grid-template-columns: 1fr 1fr; } }
+  .features li {
+    padding: var(--sp-6) 0;
+    border-bottom: 1px solid var(--border);
+    display: flex; flex-direction: column; gap: var(--sp-2);
+  }
+  @media (min-width: 768px) {
+    .features li:nth-child(odd) { padding-right: var(--sp-6); border-right: 1px solid var(--border); }
+    .features li:nth-child(even) { padding-left: var(--sp-6); }
+  }
+  .features .num { font-size: var(--fs-xs); color: var(--muted); letter-spacing: 0.12em; }
+  .features h3 { font-size: var(--fs-xl); font-weight: 400; letter-spacing: -0.025em; }
+  .features p { color: var(--muted); max-width: 40ch; }
+
+  .cta { padding-block: var(--sp-16); }
+  .cta__inner { display: flex; flex-direction: column; gap: var(--sp-4); align-items: flex-start; }
+  .cta__title { font-size: var(--fs-display); line-height: 0.95; letter-spacing: -0.045em; font-weight: 300; }
+  .cta__lede { color: var(--muted); font-size: var(--fs-lg); }
+</style>

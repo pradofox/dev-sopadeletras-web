@@ -1,5 +1,6 @@
 ---
 import { site, nav } from '../data/site';
+import Logo from './Logo.astro';
 const year = new Date().getFullYear();
 ---
 
@@ -36,7 +37,7 @@ const year = new Date().getFullYear();
       <span class="ftr__sep" aria-hidden="true">·</span>
       <span>© {year} en MTY, MX</span>
     </p>
-    <p class="ftr__wordmark" aria-hidden="true">sopadeletras<span class="ftr__r">®</span></p>
+    <Logo class="ftr__logo" />
   </div>
 </footer>
 
@@ -95,15 +96,10 @@ const year = new Date().getFullYear();
     align-items: center;
   }
   .ftr__sep { opacity: 0.5; }
-  .ftr__wordmark {
-    font-size: var(--fs-base);
+  :global(.ftr__logo) {
+    display: block;
+    height: 20px;
+    width: auto;
     color: var(--muted);
-    display: inline-flex;
-    align-items: baseline;
-  }
-  .ftr__r {
-    font-size: 0.55em;
-    transform: translateY(-0.6em);
-    margin-left: 1px;
   }
 </style>

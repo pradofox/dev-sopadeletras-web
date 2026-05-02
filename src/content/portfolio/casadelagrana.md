@@ -12,12 +12,16 @@ collaborators:
   - Denisse Gea
 quote: "Cuando el diseño se adapta a su entorno todo funciona de manera natural."
 summary: "Diseño de estrategias de difusión a través de diseño interdisciplinario."
-cover: "https://framerusercontent.com/images/E1PqDfv1rZA5YQmMTP0CuO3uxs.jpg"
+cover: "/images/portfolio/casadelagrana/E1PqDfv1rZA5YQmMTP0CuO3uxs.jpg"
 gallery:
-  - { src: "https://framerusercontent.com/images/E1PqDfv1rZA5YQmMTP0CuO3uxs.jpg" }
-  - { src: "https://framerusercontent.com/images/UGsde15qBPTrSasqywDZ3wCfBlg.jpg" }
-  - { src: "https://framerusercontent.com/images/KVsouYUnceXjZmqwHK3HHRIW7M.jpg" }
-  - { src: "https://framerusercontent.com/images/YKzCWcDsIkcVXy3KcIy8zQJ5Xc.jpg" }
+  - { src: "/images/portfolio/casadelagrana/E1PqDfv1rZA5YQmMTP0CuO3uxs.jpg" }
+  - { src: "/images/portfolio/casadelagrana/KVsouYUnceXjZmqwHK3HHRIW7M.jpg" }
+  - { src: "/images/portfolio/casadelagrana/YKzCWcDsIkcVXy3KcIy8zQJ5Xc.jpg" }
+  - { src: "/images/portfolio/casadelagrana/Ccjbs1EyIg5qWFWSSUEdGUfKF0I.jpg" }
+  - { src: "/images/portfolio/casadelagrana/HK0HLh4HhySBtGrtsDqCvWfPh8.jpg" }
+  - { src: "/images/portfolio/casadelagrana/c2F0fqYwzGgFhxzqXIIP9V9XTI.jpg" }
+  - { src: "/images/portfolio/casadelagrana/0mS6B28q1hYMXJNqmhFo8qLKVrU.jpg" }
+  - { src: "/images/portfolio/casadelagrana/98cbNIHvHu3A8JUxSMojIov0rQ.jpg" }
 order: 2
 featured: true
 ---

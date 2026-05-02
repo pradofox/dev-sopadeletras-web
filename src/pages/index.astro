@@ -4,7 +4,6 @@ import ProjectCard from '../components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
 import { team } from '../data/team';
 import { awards } from '../data/awards';
-import { site } from '../data/site';
 
 export const prerender = true;
 
@@ -17,20 +16,33 @@ const featured = portfolio.filter(p => p.data.featured).slice(0, 3);
 <Base>
   <!-- HERO -->
   <section class="hero">
-    <div class="container">
-      <p class="eyebrow">estudio creativo · Monterrey, MX</p>
-      <h1 class="hero__title">
-        <span class="hero__line">buenas</span>
-        <span class="hero__line hero__line--alt">ideas <span class="wink">;)</span></span>
+    <div class="container hero__inner">
+      <p class="eyebrow hero__eyebrow">estudio creativo · MTY, MX · 2017→</p>
+
+      <h1 class="hero__title" aria-label="buenas ideas ;)">
+        <span class="hero__line" data-split>buenas</span>
+        <span class="hero__line hero__line--alt" data-split>
+          ideas<span class="wink" aria-hidden="true">;)</span>
+        </span>
       </h1>
+
       <p class="hero__lede">
         Desarrollamos proyectos empresariales y de impacto cultural con
         <em>estrategia creativa</em>, <em>diseño</em> y <em>producción audiovisual</em>.
       </p>
+
       <div class="hero__cta">
         <a href="/trabajo" class="btn btn--primary">ver trabajo</a>
         <a href="/contacto" class="btn btn--ghost">empezar un proyecto</a>
       </div>
+
+      <a href="#trabajo" class="hero__scroll" aria-label="ver trabajo">
+        <span>scroll</span>
+        <svg width="14" height="22" viewBox="0 0 14 22" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <rect x="0.5" y="0.5" width="13" height="21" rx="6.5" />
+          <line x1="7" y1="5" x2="7" y2="9" />
+        </svg>
+      </a>
     </div>
   </section>
 
@@ -39,7 +51,7 @@ const featured = portfolio.filter(p => p.data.featured).slice(0, 3);
     <div class="container">
       <header class="sec-head">
         <span class="eyebrow">trabajo seleccionado</span>
-        <h2 class="sec-title">Proyectos recientes</h2>
+        <h2 class="sec-title">Proyectos recientes.</h2>
         <a href="/trabajo" class="sec-link link">ver todos →</a>
       </header>
       <div class="grid">
@@ -60,15 +72,15 @@ const featured = portfolio.filter(p => p.data.featured).slice(0, 3);
 
   <!-- NOSOTROS -->
   <section id="nosotros" class="nosotros">
-    <div class="container">
+    <div class="container nosotros__inner">
       <span class="eyebrow">nosotros</span>
       <p class="nosotros__lede">
-        Desarrollamos proyectos empresariales y de impacto cultural a través de
-        estrategia creativa, diseño y producción audiovisual. Acompañamos a marcas
-        y emprendedores a dar estructura, claridad y dirección a sus ideas, desde
-        el enfoque hasta la ejecución.
+        Acompañamos a marcas y emprendedores a dar
+        <em>estructura</em>, <em>claridad</em> y <em>dirección</em> a sus ideas, desde el enfoque hasta la ejecución.
       </p>
-      <p class="nosotros__claim">Convertimos ideas en buenas ideas <span class="wink">;)</span></p>
+      <p class="nosotros__claim">
+        Convertimos ideas en buenas ideas <span class="wink">;)</span>
+      </p>
     </div>
   </section>
 
@@ -77,12 +89,12 @@ const featured = portfolio.filter(p => p.data.featured).slice(0, 3);
     <div class="container">
       <header class="sec-head">
         <span class="eyebrow">equipo</span>
-        <h2 class="sec-title">Somos un equipo pequeño pero poderoso y ágil.</h2>
+        <h2 class="sec-title">Equipo pequeño,<br/>poderoso, ágil.</h2>
       </header>
       <div class="equipo__grid">
         {team.map((m, i) => (
           <article class="member">
-            <span class="member__num">{i + 1}/{team.length}</span>
+            <span class="member__num">{String(i+1).padStart(2,'0')} / {String(team.length).padStart(2,'0')}</span>
             <h3 class="member__name">{m.name}</h3>
             <p class="member__role">{m.role}</p>
             <blockquote class="member__quote">"{m.quote}"</blockquote>
@@ -101,7 +113,7 @@ const featured = portfolio.filter(p => p.data.featured).slice(0, 3);
     <div class="container">
       <header class="sec-head">
         <span class="eyebrow">reconocimientos</span>
-        <h2 class="sec-title">Premios y selecciones</h2>
+        <h2 class="sec-title">Premios y selecciones.</h2>
       </header>
       <ul class="awards">
         {awards.map(a => (
@@ -120,41 +132,95 @@ const featured = portfolio.filter(p => p.data.featured).slice(0, 3);
       </ul>
     </div>
   </section>
+
+  <!-- CTA final -->
+  <section class="cta">
+    <div class="container cta__inner">
+      <p class="eyebrow">hablemos</p>
+      <h2 class="cta__title">¿Tienes una buena idea?</h2>
+      <a href="/contacto" class="btn btn--primary btn--lg">empezar un proyecto →</a>
+    </div>
+  </section>
 </Base>
 
 <style>
   /* HERO */
   .hero {
-    padding-top: var(--sp-12);
-    padding-bottom: var(--sp-16);
+    min-height: calc(100dvh - 64px);
+    display: flex;
+    align-items: center;
+    padding-block: var(--sp-12) var(--sp-10);
+    position: relative;
   }
+  .hero__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-5);
+    width: 100%;
+  }
+  .hero__eyebrow { margin-bottom: var(--sp-2); }
+
   .hero__title {
-    font-size: var(--fs-display);
-    line-height: 0.92;
-    letter-spacing: -0.045em;
-    margin-block: var(--sp-5) var(--sp-6);
-    font-weight: 400;
+    font-size: clamp(4rem, 14vw, 13rem);
+    line-height: 0.88;
+    letter-spacing: -0.05em;
+    font-weight: 300;
+    margin: 0;
   }
   .hero__line { display: block; }
-  .hero__line--alt { font-style: italic; padding-left: 0.05em; }
+  .hero__line--alt {
+    font-style: italic;
+    padding-left: 0.04em;
+    color: var(--accent);
+  }
+
+  /* Animación de entrada por línea */
+  [data-split] {
+    overflow: hidden;
+    display: block;
+  }
+  [data-split] > * { display: inline; }
+  .hero__line {
+    transform: translateY(110%);
+    opacity: 0;
+    animation: hero-rise 1.05s var(--ease-out) forwards;
+  }
+  .hero__line--alt { animation-delay: 0.12s; }
+  @keyframes hero-rise {
+    to { transform: translateY(0); opacity: 1; }
+  }
+
   .wink {
     display: inline-block;
-    transform: translateY(-0.04em);
-    color: var(--accent);
-    font-style: normal;
+    margin-left: 0.04em;
+    transform: translateY(-0.02em);
+    animation: wink 4s var(--ease-in-out) infinite;
+    transform-origin: center;
   }
+  @keyframes wink {
+    0%, 92%, 100% { transform: translateY(-0.02em) rotate(0); }
+    96% { transform: translateY(-0.04em) rotate(-8deg); }
+  }
+
   .hero__lede {
-    max-width: 60ch;
+    max-width: 56ch;
     font-size: var(--fs-lg);
     color: var(--muted);
     line-height: 1.5;
+    margin-top: var(--sp-3);
+    opacity: 0;
+    animation: hero-fade 0.8s var(--ease-out) 0.4s forwards;
   }
-  .hero__lede em { font-style: normal; color: var(--fg); }
+  .hero__lede em { font-style: normal; color: var(--fg); font-weight: 400; }
+  @keyframes hero-fade { to { opacity: 1; } }
+
   .hero__cta {
     display: flex;
     flex-wrap: wrap;
     gap: var(--sp-3);
-    margin-top: var(--sp-6);
+    margin-top: var(--sp-3);
+    opacity: 0;
+    animation: hero-fade 0.8s var(--ease-out) 0.6s forwards;
   }
   .btn {
     display: inline-flex;
@@ -163,27 +229,54 @@ const featured = portfolio.filter(p => p.data.featured).slice(0, 3);
     padding: var(--sp-3) var(--sp-5);
     font-size: var(--fs-sm);
     border: 1px solid var(--fg);
-    transition: background var(--dur) var(--ease-out), color var(--dur) var(--ease-out), transform var(--dur) var(--ease-out);
+    transition: background var(--dur) var(--ease-out), color var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out);
   }
   .btn--primary { background: var(--fg); color: var(--bg); }
   .btn--primary:hover { background: var(--accent); border-color: var(--accent); color: white; }
   .btn--ghost:hover { background: var(--fg); color: var(--bg); }
+  .btn--lg { padding: var(--sp-4) var(--sp-6); font-size: var(--fs-base); }
+
+  .hero__scroll {
+    position: absolute;
+    bottom: var(--sp-5);
+    left: var(--gutter);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    color: var(--muted);
+    font-size: var(--fs-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0;
+    animation: hero-fade 0.8s var(--ease-out) 1s forwards, scroll-bounce 2.4s var(--ease-in-out) 1.4s infinite;
+  }
+  .hero__scroll svg line { animation: scroll-line 1.6s var(--ease-in-out) 1.4s infinite; }
+  @keyframes scroll-line {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(8px); opacity: 0.3; }
+  }
+  @keyframes scroll-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
 
   /* Section heading */
   .sec-head {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--sp-3);
-    margin-bottom: var(--sp-8);
+    gap: var(--sp-4);
+    margin-bottom: var(--sp-10);
     align-items: end;
   }
   @media (min-width: 768px) {
-    .sec-head { grid-template-columns: auto 1fr auto; column-gap: var(--sp-6); }
+    .sec-head { grid-template-columns: auto 1fr auto; column-gap: var(--sp-8); }
   }
   .sec-title {
-    font-size: var(--fs-2xl);
-    letter-spacing: -0.03em;
-    max-width: 24ch;
+    font-size: var(--fs-3xl);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    max-width: 16ch;
+    font-weight: 400;
   }
   .sec-link { font-size: var(--fs-sm); color: var(--muted); }
 
@@ -191,31 +284,48 @@ const featured = portfolio.filter(p => p.data.featured).slice(0, 3);
   .grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--sp-8) var(--sp-6);
+    gap: var(--sp-10) var(--sp-6);
   }
   @media (min-width: 720px) { .grid { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 1100px) { .grid { grid-template-columns: repeat(3, 1fr); } }
 
   /* NOSOTROS */
-  .nosotros { background: var(--subtle); }
-  .nosotros__lede {
-    max-width: 56ch;
-    font-size: var(--fs-xl);
-    margin-block: var(--sp-4) var(--sp-6);
-    color: var(--fg);
-    line-height: 1.4;
+  .nosotros {
+    background: var(--c-negro);
+    color: var(--c-blanco);
   }
+  .nosotros__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-6);
+    padding-block: var(--sp-12);
+  }
+  @media (min-width: 768px) {
+    .nosotros__inner { padding-block: var(--sp-16); }
+  }
+  .nosotros .eyebrow { color: rgba(240,240,240,0.55); }
+  .nosotros .eyebrow::before { background: var(--accent); }
+  .nosotros__lede {
+    max-width: 28ch;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    font-weight: 300;
+    color: rgba(240,240,240,0.6);
+  }
+  .nosotros__lede em { font-style: normal; color: var(--c-blanco); font-weight: 400; }
   .nosotros__claim {
     font-size: var(--fs-3xl);
-    letter-spacing: -0.035em;
+    letter-spacing: -0.04em;
     line-height: 1;
+    margin-top: var(--sp-4);
   }
 
   /* EQUIPO */
   .equipo__grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--sp-8);
+    gap: var(--sp-10);
   }
   @media (min-width: 768px) { .equipo__grid { grid-template-columns: 1fr 1fr; gap: var(--sp-12); } }
   .member {
@@ -229,7 +339,7 @@ const featured = portfolio.filter(p => p.data.featured).slice(0, 3);
     font-size: var(--fs-xs);
     color: var(--muted);
     font-variant-numeric: tabular-nums;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
   }
   .member__name {
     font-size: var(--fs-2xl);
@@ -244,6 +354,7 @@ const featured = portfolio.filter(p => p.data.featured).slice(0, 3);
     border-left: 2px solid var(--accent);
     padding-left: var(--sp-3);
     line-height: 1.4;
+    max-width: 36ch;
   }
   .member__links {
     list-style: none;
@@ -266,7 +377,9 @@ const featured = portfolio.filter(p => p.data.featured).slice(0, 3);
     padding-block: var(--sp-5);
     border-bottom: 1px solid var(--border);
     align-items: baseline;
+    transition: background var(--dur) var(--ease-out);
   }
+  .award:hover { background: var(--subtle); }
   @media (min-width: 768px) {
     .award { grid-template-columns: 100px 1fr; gap: var(--sp-8); padding-block: var(--sp-6); }
   }
@@ -280,4 +393,20 @@ const featured = portfolio.filter(p => p.data.featured).slice(0, 3);
   .award__name { font-size: var(--fs-lg); }
   .award__level { color: var(--accent); font-style: italic; }
   .award__project, .award__cat { color: var(--muted); font-size: var(--fs-sm); }
+
+  /* CTA final */
+  .cta { padding-block: var(--sp-16) var(--sp-12); }
+  .cta__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-5);
+    align-items: flex-start;
+  }
+  .cta__title {
+    font-size: var(--fs-display);
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+    font-weight: 400;
+    max-width: 14ch;
+  }
 </style>

@@ -7,9 +7,15 @@ duration: "3 meses"
 year: 2024
 collaborators: []
 summary: "Diseño editorial para una exposición del Museo MARCO."
-cover: "https://framerusercontent.com/images/aWFqQLGHYnHXQKJWaPGuK8wUz8.jpg"
+cover: "/images/portfolio/convergencias-divergencias/aRjlqxlryIebfCy85pXrEaayYo.jpg"
 gallery:
-  - { src: "https://framerusercontent.com/images/aWFqQLGHYnHXQKJWaPGuK8wUz8.jpg" }
+  - { src: "/images/portfolio/convergencias-divergencias/aRjlqxlryIebfCy85pXrEaayYo.jpg" }
+  - { src: "/images/portfolio/convergencias-divergencias/2Is7wQF32gDcm9UZlCqdSvvA.jpg" }
+  - { src: "/images/portfolio/convergencias-divergencias/eujx9D67dJ8IdmQMiHq6HLpglxU.jpg" }
+  - { src: "/images/portfolio/convergencias-divergencias/jHqVVVcPcaFMr21rnKxK5JThjBM.jpg" }
+  - { src: "/images/portfolio/convergencias-divergencias/8qDqhDPU5XNwTLcNDNCLrssC8rc.jpg" }
+  - { src: "/images/portfolio/convergencias-divergencias/Z0VGUJQ8HIeaZVEodrrIbPTQeM.jpg" }
+  - { src: "/images/portfolio/convergencias-divergencias/gHCRJrMC5a5VfPY3alFTEBJs4BI.jpg" }
 order: 6
 featured: false
 ---

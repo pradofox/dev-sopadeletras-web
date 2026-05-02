@@ -9,12 +9,15 @@ duration: "6 meses"
 year: 2025
 collaborators: []
 summary: "Sistema de identidad y comunicación para la edición 2025 de MADE Week."
-cover: "https://framerusercontent.com/images/HvZrXJtSfQgDq42HlR5Vm162Do.jpg"
+cover: "/images/portfolio/madeweek/HvZrXJtSfQgDq42HlR5Vm162Do.jpg"
 gallery:
-  - { src: "https://framerusercontent.com/images/HvZrXJtSfQgDq42HlR5Vm162Do.jpg" }
-  - { src: "https://framerusercontent.com/images/L3ejiVOgtop5C0R1XZwSxJuSpH4.jpg" }
-  - { src: "https://framerusercontent.com/images/sAfN2HMVSKOSji0mFVHfKPW6A.jpg" }
-  - { src: "https://framerusercontent.com/images/aln6RTMZt0ao2FMRUDOFKiu9to.jpg" }
+  - { src: "/images/portfolio/madeweek/HvZrXJtSfQgDq42HlR5Vm162Do.jpg" }
+  - { src: "/images/portfolio/madeweek/sAfN2HMVSKOSji0mFVHfKPW6A.jpg" }
+  - { src: "/images/portfolio/madeweek/aln6RTMZt0ao2FMRUDOFKiu9to.jpg" }
+  - { src: "/images/portfolio/madeweek/PtA5oyyzcoWhf2KjzESY3JKzE.jpg" }
+  - { src: "/images/portfolio/madeweek/ATAbkbGbggtfCFprxjclcRnjg.jpg" }
+  - { src: "/images/portfolio/madeweek/mraRhFXJDcxcn3GdH288vs5IaQ.jpg" }
+  - { src: "/images/portfolio/madeweek/A6qvVSCzWo9ZrQm0xDm4suMZ48g.jpg" }
 order: 3
 featured: true
 ---
