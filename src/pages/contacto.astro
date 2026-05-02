@@ -1,0 +1,202 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+
+let status: 'idle' | 'ok' | 'error' = 'idle';
+
+if (Astro.request.method === 'POST') {
+  try {
+    const form = await Astro.request.formData();
+    if (form.get('hp')) {
+      status = 'ok'; // honeypot tripped, swallow silently
+    } else {
+      const payload = {
+        name: form.get('name'),
+        email: form.get('email'),
+        project: form.get('project'),
+        industry: form.get('industry'),
+        services: form.getAll('services'),
+        details: form.get('details'),
+        ts: new Date().toISOString(),
+      };
+      // TODO: enviar a hola@sopadeletras.art via Worker email/Resend en próxima iteración
+      console.log('contacto', payload);
+      status = 'ok';
+    }
+  } catch (e) {
+    console.error(e);
+    status = 'error';
+  }
+}
+---
+
+<Base
+  title="contacto"
+  description={`Cuéntanos sobre la idea que tienes en mente. Escríbenos a ${site.email} o usa el formulario.`}
+>
+  <section class="head">
+    <div class="container">
+      <span class="eyebrow">contacto</span>
+      <h1 class="head__title">contacto</h1>
+      <p class="head__lede">
+        Cuéntanos sobre la idea que tienes en mente y nos pondremos en contacto
+        contigo a la brevedad <span class="wink">;)</span>
+      </p>
+      <p class="head__email">
+        ¿Prefieres correo? <a class="link" href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="form-wrap">
+    <div class="container">
+      {status === 'ok' ? (
+        <div class="ok">
+          <h2>Mensaje recibido <span class="wink">;)</span></h2>
+          <p>Te respondemos a la brevedad. Mientras, échale un ojo al <a href="/trabajo" class="link">trabajo</a>.</p>
+        </div>
+      ) : (
+        <form method="POST" class="form" novalidate>
+          <input type="text" name="hp" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+
+          {status === 'error' && <p class="err">Algo falló. Mejor escríbenos por correo.</p>}
+
+          <div class="grid">
+            <div class="field">
+              <label for="name">Nombre</label>
+              <input type="text" id="name" name="name" required autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="email">Correo electrónico</label>
+              <input type="email" id="email" name="email" required autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="project">Nombre del proyecto</label>
+              <input type="text" id="project" name="project" />
+            </div>
+            <div class="field">
+              <label for="industry">Industria</label>
+              <input type="text" id="industry" name="industry" />
+            </div>
+          </div>
+
+          <fieldset class="checks">
+            <legend>Servicios requeridos</legend>
+            <div class="checks__grid">
+              {['Estrategia creativa', 'Branding', 'Diseño', 'Producción audiovisual', 'Sitio web', 'Otro'].map(s => (
+                <label class="check">
+                  <input type="checkbox" name="services" value={s} />
+                  <span>{s}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="details">Detalles adicionales</label>
+            <textarea id="details" name="details" rows="6"></textarea>
+          </div>
+
+          <button type="submit" class="submit">
+            Enviar
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2">
+              <path d="M1 13L13 1M13 1H4M13 1V10" />
+            </svg>
+          </button>
+        </form>
+      )}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .head { padding-top: var(--sp-12); padding-bottom: var(--sp-6); }
+  .head__title {
+    font-size: var(--fs-display);
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+    margin-block: var(--sp-4) var(--sp-5);
+    font-weight: 400;
+  }
+  .head__lede {
+    font-size: var(--fs-xl);
+    color: var(--fg);
+    max-width: 50ch;
+    line-height: 1.4;
+  }
+  .head__email { color: var(--muted); margin-top: var(--sp-4); font-size: var(--fs-base); }
+  .wink { color: var(--accent); }
+
+  .form-wrap { padding-top: var(--sp-6); padding-bottom: var(--sp-16); }
+  .form {
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-6);
+  }
+  .hp { position: absolute; left: -9999px; opacity: 0; pointer-events: none; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-5);
+  }
+  @media (min-width: 640px) { .grid { grid-template-columns: 1fr 1fr; } }
+
+  .field { display: flex; flex-direction: column; gap: var(--sp-2); }
+  .field label, .checks legend {
+    font-size: var(--fs-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+  input[type="text"], input[type="email"], textarea {
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    background: transparent;
+    color: var(--fg);
+    font: inherit;
+    padding: var(--sp-2) 0;
+    transition: border-color var(--dur) var(--ease-out);
+    border-radius: 0;
+  }
+  input:focus, textarea:focus {
+    outline: none;
+    border-bottom-color: var(--fg);
+  }
+  textarea { resize: vertical; min-height: 8rem; }
+
+  .checks { border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--sp-3); }
+  .checks__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-2) var(--sp-4);
+  }
+  @media (min-width: 640px) { .checks__grid { grid-template-columns: repeat(3, 1fr); } }
+  .check { display: inline-flex; align-items: center; gap: var(--sp-2); font-size: var(--fs-base); cursor: pointer; }
+  .check input { accent-color: var(--accent); }
+
+  .submit {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: var(--sp-3) var(--sp-6);
+    background: var(--fg); color: var(--bg);
+    border: 1px solid var(--fg);
+    transition: background var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out);
+    font-size: var(--fs-sm);
+  }
+  .submit:hover { background: var(--accent); border-color: var(--accent); color: white; }
+  .submit svg { transition: transform var(--dur) var(--ease-out); }
+  .submit:hover svg { transform: translate(2px, -2px); }
+
+  .ok h2 { font-size: var(--fs-2xl); letter-spacing: -0.03em; margin-bottom: var(--sp-3); }
+  .ok p { color: var(--muted); font-size: var(--fs-lg); }
+  .err {
+    background: var(--c-rojo);
+    color: white;
+    padding: var(--sp-3) var(--sp-4);
+    font-size: var(--fs-sm);
+  }
+</style>

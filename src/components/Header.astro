@@ -1,0 +1,161 @@
+---
+import { nav, site } from '../data/site';
+const path = Astro.url.pathname;
+---
+
+<header class="hdr">
+  <div class="container hdr__inner">
+    <a href="/" class="hdr__brand" aria-label={`${site.name} — inicio`}>
+      <span class="brand">sopadeletras</span><span class="brand__r">®</span>
+    </a>
+
+    <nav class="hdr__nav" aria-label="Navegación principal">
+      {nav.map(item => (
+        <a
+          href={item.href}
+          class:list={['hdr__link', { 'is-active': path === item.href || (item.href !== '/' && path.startsWith(item.href.split('#')[0])) }]}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <button class="hdr__menu" type="button" aria-label="Abrir menú" aria-expanded="false" id="menu-toggle">
+      <span></span><span></span>
+    </button>
+  </div>
+
+  <div class="hdr__sheet" id="menu-sheet" hidden>
+    <nav aria-label="Navegación móvil" class="hdr__sheet-nav">
+      {nav.map(item => (
+        <a href={item.href} class="hdr__sheet-link">{item.label}</a>
+      ))}
+    </nav>
+    <div class="hdr__sheet-foot">
+      <a href={`mailto:${site.email}`} class="link">{site.email}</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .hdr {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--subtle);
+  }
+  .hdr__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: var(--sp-3);
+    gap: var(--sp-4);
+  }
+  .hdr__brand {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 1px;
+    font-weight: 500;
+    font-size: var(--fs-base);
+    letter-spacing: -0.025em;
+  }
+  .brand__r {
+    display: inline-block;
+    font-size: 0.55em;
+    transform: translateY(-0.6em);
+    transition: transform var(--dur) var(--ease-out);
+  }
+  .hdr__brand:hover .brand__r {
+    transform: translateY(-0.6em) rotate(360deg);
+  }
+  .hdr__nav {
+    display: none;
+    gap: var(--sp-5);
+    align-items: center;
+  }
+  .hdr__link {
+    font-size: var(--fs-sm);
+    color: var(--muted);
+    transition: color var(--dur-fast) var(--ease-out);
+    position: relative;
+  }
+  .hdr__link:hover, .hdr__link.is-active { color: var(--fg); }
+  .hdr__link.is-active::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -6px;
+    height: 1px; background: var(--fg);
+  }
+
+  .hdr__menu {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 32px; height: 32px;
+    padding: 8px 4px;
+  }
+  .hdr__menu span {
+    display: block; height: 1.5px; background: var(--fg);
+    transition: transform var(--dur) var(--ease-out), opacity var(--dur) var(--ease-out);
+  }
+  .hdr__menu[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(3.5px) rotate(45deg);
+  }
+  .hdr__menu[aria-expanded="true"] span:nth-child(2) {
+    transform: translateY(-3.5px) rotate(-45deg);
+  }
+
+  .hdr__sheet {
+    position: fixed;
+    inset: 56px 0 0 0;
+    background: var(--bg);
+    padding: var(--sp-8) var(--gutter);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 40;
+  }
+  .hdr__sheet[hidden] { display: none; }
+  .hdr__sheet-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+  .hdr__sheet-link {
+    font-size: var(--fs-2xl);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+  }
+  .hdr__sheet-foot { padding-bottom: var(--sp-8); }
+
+  @media (min-width: 768px) {
+    .hdr__nav { display: inline-flex; }
+    .hdr__menu { display: none; }
+    .hdr__sheet { display: none !important; }
+  }
+</style>
+
+<script>
+  const init = () => {
+    const btn = document.getElementById('menu-toggle');
+    const sheet = document.getElementById('menu-sheet');
+    if (!btn || !sheet) return;
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      if (open) sheet.setAttribute('hidden', '');
+      else sheet.removeAttribute('hidden');
+      document.body.style.overflow = open ? '' : 'hidden';
+    });
+    sheet.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      btn.setAttribute('aria-expanded', 'false');
+      sheet.setAttribute('hidden', '');
+      document.body.style.overflow = '';
+    }));
+  };
+  document.addEventListener('astro:page-load', init);
+</script>

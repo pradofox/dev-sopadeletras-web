@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+export const prerender = true;
+
+const portfolio = (await getCollection('portfolio'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base
+  title="trabajo"
+  description="Portafolio de sopadeletras®. Proyectos de estrategia creativa, branding, diseño y producción audiovisual para marcas, instituciones y proyectos culturales."
+>
+  <section class="head">
+    <div class="container">
+      <span class="eyebrow">portafolio</span>
+      <h1 class="head__title">trabajo</h1>
+      <p class="head__lede">{portfolio.length} proyectos seleccionados.</p>
+    </div>
+  </section>
+
+  <section class="list">
+    <div class="container">
+      <div class="grid">
+        {portfolio.map((p, i) => (
+          <ProjectCard
+            href={`/trabajo/${p.id}`}
+            title={p.data.title}
+            client={p.data.client}
+            categories={p.data.categories}
+            duration={p.data.duration}
+            cover={p.data.cover}
+            index={i}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .head { padding-top: var(--sp-12); padding-bottom: var(--sp-6); }
+  .head__title {
+    font-size: var(--fs-display);
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+    margin-block: var(--sp-4) var(--sp-3);
+    font-weight: 400;
+  }
+  .head__lede { color: var(--muted); font-size: var(--fs-base); }
+
+  .list { padding-top: var(--sp-6); }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-10) var(--sp-6);
+  }
+  @media (min-width: 720px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1100px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+</style>

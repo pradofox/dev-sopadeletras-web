@@ -1,0 +1,283 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+import { team } from '../data/team';
+import { awards } from '../data/awards';
+import { site } from '../data/site';
+
+export const prerender = true;
+
+const portfolio = (await getCollection('portfolio'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => a.data.order - b.data.order);
+const featured = portfolio.filter(p => p.data.featured).slice(0, 3);
+---
+
+<Base>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">estudio creativo · Monterrey, MX</p>
+      <h1 class="hero__title">
+        <span class="hero__line">buenas</span>
+        <span class="hero__line hero__line--alt">ideas <span class="wink">;)</span></span>
+      </h1>
+      <p class="hero__lede">
+        Desarrollamos proyectos empresariales y de impacto cultural con
+        <em>estrategia creativa</em>, <em>diseño</em> y <em>producción audiovisual</em>.
+      </p>
+      <div class="hero__cta">
+        <a href="/trabajo" class="btn btn--primary">ver trabajo</a>
+        <a href="/contacto" class="btn btn--ghost">empezar un proyecto</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRABAJO destacado -->
+  <section id="trabajo">
+    <div class="container">
+      <header class="sec-head">
+        <span class="eyebrow">trabajo seleccionado</span>
+        <h2 class="sec-title">Proyectos recientes</h2>
+        <a href="/trabajo" class="sec-link link">ver todos →</a>
+      </header>
+      <div class="grid">
+        {featured.map((p, i) => (
+          <ProjectCard
+            href={`/trabajo/${p.id}`}
+            title={p.data.title}
+            client={p.data.client}
+            categories={p.data.categories}
+            duration={p.data.duration}
+            cover={p.data.cover}
+            index={i}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- NOSOTROS -->
+  <section id="nosotros" class="nosotros">
+    <div class="container">
+      <span class="eyebrow">nosotros</span>
+      <p class="nosotros__lede">
+        Desarrollamos proyectos empresariales y de impacto cultural a través de
+        estrategia creativa, diseño y producción audiovisual. Acompañamos a marcas
+        y emprendedores a dar estructura, claridad y dirección a sus ideas, desde
+        el enfoque hasta la ejecución.
+      </p>
+      <p class="nosotros__claim">Convertimos ideas en buenas ideas <span class="wink">;)</span></p>
+    </div>
+  </section>
+
+  <!-- EQUIPO -->
+  <section id="equipo" class="equipo">
+    <div class="container">
+      <header class="sec-head">
+        <span class="eyebrow">equipo</span>
+        <h2 class="sec-title">Somos un equipo pequeño pero poderoso y ágil.</h2>
+      </header>
+      <div class="equipo__grid">
+        {team.map((m, i) => (
+          <article class="member">
+            <span class="member__num">{i + 1}/{team.length}</span>
+            <h3 class="member__name">{m.name}</h3>
+            <p class="member__role">{m.role}</p>
+            <blockquote class="member__quote">"{m.quote}"</blockquote>
+            <ul class="member__links">
+              {m.instagram && <li><a class="link" href={m.instagram} target="_blank" rel="noopener">instagram</a></li>}
+              {m.linkedin && <li><a class="link" href={m.linkedin} target="_blank" rel="noopener">linkedin</a></li>}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PREMIOS -->
+  <section id="premios" class="premios">
+    <div class="container">
+      <header class="sec-head">
+        <span class="eyebrow">reconocimientos</span>
+        <h2 class="sec-title">Premios y selecciones</h2>
+      </header>
+      <ul class="awards">
+        {awards.map(a => (
+          <li class="award">
+            <span class="award__year">{a.year}</span>
+            <div class="award__body">
+              <p class="award__name">
+                {a.award}
+                {a.level && <span class="award__level"> — {a.level}</span>}
+              </p>
+              <p class="award__project">Por <em>{a.project}</em></p>
+              <p class="award__cat">En la categoría: {a.category}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* HERO */
+  .hero {
+    padding-top: var(--sp-12);
+    padding-bottom: var(--sp-16);
+  }
+  .hero__title {
+    font-size: var(--fs-display);
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+    margin-block: var(--sp-5) var(--sp-6);
+    font-weight: 400;
+  }
+  .hero__line { display: block; }
+  .hero__line--alt { font-style: italic; padding-left: 0.05em; }
+  .wink {
+    display: inline-block;
+    transform: translateY(-0.04em);
+    color: var(--accent);
+    font-style: normal;
+  }
+  .hero__lede {
+    max-width: 60ch;
+    font-size: var(--fs-lg);
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .hero__lede em { font-style: normal; color: var(--fg); }
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    margin-top: var(--sp-6);
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: var(--sp-3) var(--sp-5);
+    font-size: var(--fs-sm);
+    border: 1px solid var(--fg);
+    transition: background var(--dur) var(--ease-out), color var(--dur) var(--ease-out), transform var(--dur) var(--ease-out);
+  }
+  .btn--primary { background: var(--fg); color: var(--bg); }
+  .btn--primary:hover { background: var(--accent); border-color: var(--accent); color: white; }
+  .btn--ghost:hover { background: var(--fg); color: var(--bg); }
+
+  /* Section heading */
+  .sec-head {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-8);
+    align-items: end;
+  }
+  @media (min-width: 768px) {
+    .sec-head { grid-template-columns: auto 1fr auto; column-gap: var(--sp-6); }
+  }
+  .sec-title {
+    font-size: var(--fs-2xl);
+    letter-spacing: -0.03em;
+    max-width: 24ch;
+  }
+  .sec-link { font-size: var(--fs-sm); color: var(--muted); }
+
+  /* Grid */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-8) var(--sp-6);
+  }
+  @media (min-width: 720px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1100px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+
+  /* NOSOTROS */
+  .nosotros { background: var(--subtle); }
+  .nosotros__lede {
+    max-width: 56ch;
+    font-size: var(--fs-xl);
+    margin-block: var(--sp-4) var(--sp-6);
+    color: var(--fg);
+    line-height: 1.4;
+  }
+  .nosotros__claim {
+    font-size: var(--fs-3xl);
+    letter-spacing: -0.035em;
+    line-height: 1;
+  }
+
+  /* EQUIPO */
+  .equipo__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-8);
+  }
+  @media (min-width: 768px) { .equipo__grid { grid-template-columns: 1fr 1fr; gap: var(--sp-12); } }
+  .member {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--border);
+  }
+  .member__num {
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.08em;
+  }
+  .member__name {
+    font-size: var(--fs-2xl);
+    letter-spacing: -0.03em;
+  }
+  .member__role { color: var(--muted); font-size: var(--fs-base); }
+  .member__quote {
+    margin: 0;
+    font-size: var(--fs-lg);
+    font-style: italic;
+    color: var(--fg);
+    border-left: 2px solid var(--accent);
+    padding-left: var(--sp-3);
+    line-height: 1.4;
+  }
+  .member__links {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: flex; gap: var(--sp-4);
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+
+  /* PREMIOS */
+  .awards {
+    list-style: none;
+    padding: 0; margin: 0;
+    border-top: 1px solid var(--border);
+  }
+  .award {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: var(--sp-4);
+    padding-block: var(--sp-5);
+    border-bottom: 1px solid var(--border);
+    align-items: baseline;
+  }
+  @media (min-width: 768px) {
+    .award { grid-template-columns: 100px 1fr; gap: var(--sp-8); padding-block: var(--sp-6); }
+  }
+  .award__year {
+    font-size: var(--fs-xl);
+    font-variant-numeric: tabular-nums;
+    color: var(--fg);
+    letter-spacing: -0.02em;
+  }
+  .award__body { display: flex; flex-direction: column; gap: var(--sp-1); }
+  .award__name { font-size: var(--fs-lg); }
+  .award__level { color: var(--accent); font-style: italic; }
+  .award__project, .award__cat { color: var(--muted); font-size: var(--fs-sm); }
+</style>

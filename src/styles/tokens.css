@@ -1,0 +1,91 @@
+/* sopadeletras® design tokens
+ * Paleta dash.sopadeletras.art compartida.
+ * Default light, dark via [data-theme="dark"] o prefers-color-scheme.
+ */
+
+:root {
+  /* Colores base */
+  --c-negro: #1d1d1f;
+  --c-blanco: #f0f0f0;
+
+  /* Acentos */
+  --c-azul: #1961ae;
+  --c-rojo: #e03e52;
+  --c-amarillo: #f7ea48;
+  --c-naranja: #ff9e1b;
+  --c-verde: #71b790;
+  --c-morado: #b4b5df;
+
+  /* Aliases de rol */
+  --accent: var(--c-azul);
+  --success: var(--c-verde);
+  --error: var(--c-rojo);
+  --warning: var(--c-naranja);
+  --highlight: var(--c-amarillo);
+  --secondary: var(--c-morado);
+
+  /* Tokens semánticos — modo claro (default) */
+  --bg: #f0f0f0;
+  --fg: #1d1d1f;
+  --muted: rgba(29, 29, 31, 0.55);
+  --subtle: rgba(29, 29, 31, 0.08);
+  --border: rgba(29, 29, 31, 0.12);
+
+  /* Tipografía */
+  --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', ui-monospace, Menlo, monospace;
+
+  /* Escala tipográfica fluida (clamp min..ideal..max) */
+  --fs-xs:    clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+  --fs-sm:    clamp(0.875rem, 0.83rem + 0.2vw, 0.9375rem);
+  --fs-base:  clamp(1rem, 0.95rem + 0.25vw, 1.0625rem);
+  --fs-lg:    clamp(1.125rem, 1.05rem + 0.4vw, 1.25rem);
+  --fs-xl:    clamp(1.5rem, 1.35rem + 0.75vw, 1.875rem);
+  --fs-2xl:   clamp(2rem, 1.7rem + 1.5vw, 3rem);
+  --fs-3xl:   clamp(2.5rem, 2rem + 2.5vw, 4.5rem);
+  --fs-display: clamp(3.5rem, 2.5rem + 5vw, 8rem);
+
+  /* Espaciado */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-8: 3rem;
+  --sp-10: 4rem;
+  --sp-12: 6rem;
+  --sp-16: 8rem;
+  --sp-20: 12rem;
+
+  /* Layout */
+  --container: 88rem;
+  --gutter: clamp(1rem, 4vw, 3rem);
+  --radius: 0;
+  --radius-sm: 2px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 180ms;
+  --dur: 320ms;
+  --dur-slow: 600ms;
+}
+
+[data-theme="dark"] {
+  --bg: #1d1d1f;
+  --fg: #f0f0f0;
+  --muted: rgba(240, 240, 240, 0.55);
+  --subtle: rgba(240, 240, 240, 0.08);
+  --border: rgba(240, 240, 240, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1d1d1f;
+    --fg: #f0f0f0;
+    --muted: rgba(240, 240, 240, 0.55);
+    --subtle: rgba(240, 240, 240, 0.08);
+    --border: rgba(240, 240, 240, 0.12);
+  }
+}

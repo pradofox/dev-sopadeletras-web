@@ -1,0 +1,109 @@
+---
+import { site, nav } from '../data/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="ftr">
+  <div class="container ftr__top">
+    <div class="ftr__col">
+      <p class="eyebrow">hablemos</p>
+      <a href={`mailto:${site.email}`} class="ftr__email">{site.email}</a>
+    </div>
+
+    <div class="ftr__col">
+      <p class="eyebrow">síguenos</p>
+      <ul class="ftr__list">
+        <li><a class="link" href={site.social.instagram} target="_blank" rel="noopener">instagram</a></li>
+        <li><a class="link" href={site.social.tiktok} target="_blank" rel="noopener">tiktok</a></li>
+        <li><a class="link" href={site.social.linkedin} target="_blank" rel="noopener">linkedin</a></li>
+        <li><a class="link" href={site.social.facebook} target="_blank" rel="noopener">facebook</a></li>
+      </ul>
+    </div>
+
+    <div class="ftr__col">
+      <p class="eyebrow">menú</p>
+      <ul class="ftr__list">
+        {nav.map(n => <li><a class="link" href={n.href}>{n.label}</a></li>)}
+      </ul>
+    </div>
+  </div>
+
+  <div class="container ftr__bottom">
+    <p class="ftr__credit">
+      <span>ideado por sopadeletras®</span>
+      <span class="ftr__sep" aria-hidden="true">·</span>
+      <span>diseñado por sopadeletras®</span>
+      <span class="ftr__sep" aria-hidden="true">·</span>
+      <span>© {year} en MTY, MX</span>
+    </p>
+    <p class="ftr__wordmark" aria-hidden="true">sopadeletras<span class="ftr__r">®</span></p>
+  </div>
+</footer>
+
+<style>
+  .ftr {
+    margin-top: var(--sp-12);
+    border-top: 1px solid var(--subtle);
+    padding-block: var(--sp-10) var(--sp-6);
+    background: var(--bg);
+  }
+  .ftr__top {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-8);
+    padding-bottom: var(--sp-10);
+  }
+  @media (min-width: 768px) {
+    .ftr__top { grid-template-columns: 1.5fr 1fr 1fr; }
+  }
+  .ftr__col { display: flex; flex-direction: column; gap: var(--sp-3); }
+  .ftr__email {
+    font-size: var(--fs-xl);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size var(--dur) var(--ease-out);
+    padding-bottom: 2px;
+    width: max-content;
+    max-width: 100%;
+  }
+  .ftr__email:hover { background-size: 100% 1px; }
+  .ftr__list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--sp-2); }
+  .ftr__list a { font-size: var(--fs-base); }
+
+  .ftr__bottom {
+    border-top: 1px solid var(--subtle);
+    padding-top: var(--sp-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  @media (min-width: 768px) {
+    .ftr__bottom { flex-direction: row; align-items: center; }
+  }
+  .ftr__credit {
+    color: var(--muted);
+    font-size: var(--fs-xs);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    align-items: center;
+  }
+  .ftr__sep { opacity: 0.5; }
+  .ftr__wordmark {
+    font-size: var(--fs-base);
+    color: var(--muted);
+    display: inline-flex;
+    align-items: baseline;
+  }
+  .ftr__r {
+    font-size: 0.55em;
+    transform: translateY(-0.6em);
+    margin-left: 1px;
+  }
+</style>
