@@ -35,7 +35,7 @@ const orgSchema = {
   alternateName: 'sopadeletras®',
   url: site.url,
   email: site.email,
-  logo: new URL('/favicon.svg', site.url).toString(),
+  logo: new URL('/favicon.png', site.url).toString(),
   description: site.description,
   foundingDate: String(site.founded),
   address: {
@@ -65,9 +65,8 @@ const orgSchema = {
 
     {noIndex && <meta name="robots" content="noindex, nofollow" />}
 
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.png" sizes="any" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#f0f0f0" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#1d1d1f" media="(prefers-color-scheme: dark)" />
 
